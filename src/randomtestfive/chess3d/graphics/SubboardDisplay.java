@@ -35,8 +35,8 @@ public class SubboardDisplay extends JPanel implements MouseListener {
 		sprites = new HashMap<>();
 		try {
 //			System.out.println(getClass().getResource("/randomtestfive/graphics/pawn.png"));
-			sprites.put("Pawn", new BufferedImage[]{ImageIO.read(getClass().getResource("/randomtestfive/graphics/pawn.png")),
-					ImageIO.read(getClass().getResource("/randomtestfive/graphics/pawn.png"))});
+			sprites.put("Pawn", new BufferedImage[]{ImageIO.read(getClass().getResource("pawn.png")),
+					ImageIO.read(getClass().getResource("pawn.png"))});
 			sprites.put("Knight", sprites.get("Pawn"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
