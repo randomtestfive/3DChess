@@ -18,6 +18,10 @@ public abstract class ChessPiece {
 		pos = new Position3D(x, y, z);
 	}
 	
+	public void moveTo(Position3D p) {
+		pos = p;
+	}
+	
 	public Position3D getPosition() { return pos; }
 	public Player getOwner() { return owner; }
 	

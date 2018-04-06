@@ -26,14 +26,19 @@ public class Pawn extends ChessPiece {
 	@Override
 	public List<Position3D> getPossibleMoves(List<ChessPiece> pieces) {
 		List<Position3D> possible = new ArrayList<>();
-		List<Position3D> piecepos = pieces.stream().map((p)->getPosition()).collect(Collectors.toList());
+		List<Position3D> piecepos = pieces.stream()
+				.map((p)->p.getPosition())
+				.collect(Collectors.toList());
+		piecepos.forEach(System.out::println);
+		System.out.println(getPosition().getOffset(0, offset, 0));
+		System.out.println("call");
 		//System.out.println(piecepos.get(1));
-		if(getPosition().getY()+offset > 0 && getPosition().getY()+offset < 4
+		if(getPosition().getY()+offset >= 0 && getPosition().getY()+offset <= 4
 				&& !piecepos.contains(getPosition().getOffset(0, offset, 0))) {
 			possible.add(getPosition().getOffset(0, offset, 0));
 		}
-		if(getPosition().getZ()+offset > 0 && getPosition().getZ()+offset < 4
-				&& !piecepos.contains(getPosition().getOffset(0, offset, 0))) {
+		if(getPosition().getZ()+offset >= 0 && getPosition().getZ()+offset <= 4
+				&& !piecepos.contains(getPosition().getOffset(0, 0, offset))) {
 			possible.add(getPosition().getOffset(0, 0, offset));
 		}
 		possible.addAll(
