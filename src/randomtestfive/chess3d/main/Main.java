@@ -38,6 +38,8 @@ public class Main {
 		p.add(new Knight(3, 4, 4, Player.BLACK));
 		p.add(new King(2, 0, 0, Player.WHITE));
 		p.add(new King(2, 4, 4, Player.BLACK));
+		p.add(new Rook(0, 0, 0, Player.WHITE));
+		p.add(new Rook(4, 0, 0, Player.WHITE));
 		new MainDisplay(b);
 //		//b.getPieces().add(new Pawn(4,3,3,Player.WHITE));
 //		System.out.println(b);

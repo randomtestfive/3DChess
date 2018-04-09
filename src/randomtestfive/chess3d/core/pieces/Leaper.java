@@ -49,7 +49,7 @@ public class Leaper extends ChessPiece {
 				new Position3D(xo,-zo,yo),
 				new Position3D(xo,-zo,-yo),
 				new Position3D(-xo,-zo,-yo)
-				));
+			));
 	}
 
 	@Override
