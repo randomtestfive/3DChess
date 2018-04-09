@@ -38,4 +38,9 @@ public class Position3D {
 		}
 		return false;
 	}
+	
+	@Override
+	public int hashCode() {
+		return xpos ^ ypos ^ zpos;
+	}
 }

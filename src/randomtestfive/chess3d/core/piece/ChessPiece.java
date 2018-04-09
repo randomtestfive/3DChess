@@ -1,6 +1,7 @@
 package randomtestfive.chess3d.core.piece;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import randomtestfive.chess3d.core.Player;
 import randomtestfive.chess3d.core.Position3D;
@@ -10,16 +11,20 @@ public abstract class ChessPiece {
 	private final Player owner;
 	
 	public ChessPiece(int x, int y, int z, Player owner) {
-		moveTo(x, y, z);
+		moveTo(x, y, z, new HashSet<>());
 		this.owner = owner; 
 	}
 	
-	public void moveTo(int x, int y, int z) {
-		pos = new Position3D(x, y, z);
+	public void moveTo(int x, int y, int z, Set<ChessPiece> pieces) {
+		moveTo(new Position3D(x, y, z), pieces);
 	}
 	
-	public void moveTo(Position3D p) {
+	public void moveTo(Position3D p, Set<ChessPiece> pieces) {
 		pos = p;
+		pieces.stream()
+			.filter(piece->piece!=this)
+			.filter(piece->piece.getPosition().equals(pos))
+			.findFirst().ifPresent(piece->pieces.remove(piece));
 	}
 	
 	public Position3D getPosition() { return pos; }
@@ -30,6 +35,6 @@ public abstract class ChessPiece {
 		return owner + " " + getPieceName() + " " + pos.toString();
 	}
 	
-	public abstract List<Position3D> getPossibleMoves(List<ChessPiece> pieces);
+	public abstract Set<Position3D> getPossibleMoves(Set<ChessPiece> pieces);
 	public abstract String getPieceName();
 }

@@ -1,8 +1,8 @@
 package randomtestfive.chess3d.core.piece;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import randomtestfive.chess3d.core.Player;
@@ -10,29 +10,27 @@ import randomtestfive.chess3d.core.Position3D;
 
 public class Pawn extends ChessPiece {
 	private final int offset;
-	private final List<Position3D> captureOffsets;
+	private final Set<Position3D> captureOffsets;
 
 	public Pawn(int x, int y, int z, Player owner) {
 		super(x, y, z, owner);
 		offset = getOwner() == Player.BLACK ? -1 : 1;
-		captureOffsets = Arrays.asList(
+		captureOffsets = new HashSet<>(Arrays.asList(
 				new Position3D(-1,offset,0),
 				new Position3D(1,offset,0),
 				new Position3D(-1,0,offset),
 				new Position3D(1,0,offset),
-				new Position3D(0,offset,offset));
+				new Position3D(0,offset,offset)));
 	}
 
 	@Override
-	public List<Position3D> getPossibleMoves(List<ChessPiece> pieces) {
-		List<Position3D> possible = new ArrayList<>();
-		List<Position3D> piecepos = pieces.stream()
+	public Set<Position3D> getPossibleMoves(Set<ChessPiece> pieces) {
+		Set<Position3D> possible = new HashSet<>();
+		Set<Position3D> piecepos = pieces.stream()
 				.map((p)->p.getPosition())
-				.collect(Collectors.toList());
-		piecepos.forEach(System.out::println);
-		System.out.println(getPosition().getOffset(0, offset, 0));
-		System.out.println("call");
-		//System.out.println(piecepos.get(1));
+				.collect(Collectors.toSet());
+		System.out.println(piecepos);
+		System.out.println(getPosition().getOffset(0, 0, offset));
 		if(getPosition().getY()+offset >= 0 && getPosition().getY()+offset <= 4
 				&& !piecepos.contains(getPosition().getOffset(0, offset, 0))) {
 			possible.add(getPosition().getOffset(0, offset, 0));

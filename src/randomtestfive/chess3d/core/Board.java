@@ -1,29 +1,29 @@
 package randomtestfive.chess3d.core;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import randomtestfive.chess3d.core.piece.ChessPiece;
 
 public class Board {
-	private final List<ChessPiece> pieces;
+	private final Set<ChessPiece> pieces;
 	
 	public Board() {
-		pieces = new ArrayList<ChessPiece>();
+		pieces = new HashSet<>();
 	}
 	
-	public List<ChessPiece> getPieces() { return pieces; }
+	public Set<ChessPiece> getPieces() { return pieces; }
 	
-	public List<ChessPiece> onSubBoard(int i) {
+	public Set<ChessPiece> onSubBoard(int i) {
 		return pieces.stream()
 				.filter((p)->p.getPosition().getZ()==i)
-				.collect(Collectors.toList());
+				.collect(Collectors.toSet());
 	}
 	
 	public String subBoardToString(int i) {
 		StringBuilder out = new StringBuilder();
-		List<ChessPiece> sub = onSubBoard(i);
+		Set<ChessPiece> sub = onSubBoard(i);
 		int[] pos = new int[]{0,4};
 		while(pos[1]>=0) {
 			while(pos[0]<5) {

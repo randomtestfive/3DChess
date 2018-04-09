@@ -1,6 +1,6 @@
 package randomtestfive.chess3d.main;
 
-import java.util.List;
+import java.util.Set;
 
 import randomtestfive.chess3d.core.Board;
 import randomtestfive.chess3d.core.Player;
@@ -11,7 +11,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Board b = new Board();
-		List<ChessPiece> p = b.getPieces();
+		Set<ChessPiece> p = b.getPieces();
 		p.add(new Pawn(0, 1, 0, Player.WHITE));
 		p.add(new Pawn(1, 1, 0, Player.WHITE));
 		p.add(new Pawn(2, 1, 0, Player.WHITE));
@@ -36,6 +36,8 @@ public class Main {
 		p.add(new Knight(3, 0, 0, Player.WHITE));
 		p.add(new Knight(1, 4, 4, Player.BLACK));
 		p.add(new Knight(3, 4, 4, Player.BLACK));
+		p.add(new King(2, 0, 0, Player.WHITE));
+		p.add(new King(2, 4, 4, Player.BLACK));
 		new MainDisplay(b);
 //		//b.getPieces().add(new Pawn(4,3,3,Player.WHITE));
 //		System.out.println(b);

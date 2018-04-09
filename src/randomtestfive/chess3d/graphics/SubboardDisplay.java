@@ -9,7 +9,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Set;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
@@ -40,6 +40,8 @@ public class SubboardDisplay extends JPanel implements MouseListener {
 					ImageIO.read(getClass().getResource("pawn-w.png"))});
 			sprites.put("Knight",new BufferedImage[]{ImageIO.read(getClass().getResource("knight-b.png")),
 					ImageIO.read(getClass().getResource("knight-w.png"))});
+			sprites.put("King",new BufferedImage[]{ImageIO.read(getClass().getResource("knight-b.png")),
+					ImageIO.read(getClass().getResource("knight-w.png"))});
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -68,7 +70,7 @@ public class SubboardDisplay extends JPanel implements MouseListener {
 			.filter(p->p.getZ()==layer)
 			.forEach(p->g2d.fillRect(wsize*p.getX(), hsize*(4-p.getY()), wsize, hsize)));
 		
-		List<ChessPiece> pieces = board.onSubBoard(layer);
+		Set<ChessPiece> pieces = board.onSubBoard(layer);
 		for(ChessPiece p : pieces) {
 			BufferedImage s = sprites.get(p.getPieceName())[p.getOwner().ordinal()];
 			g2d.drawImage(s, p.getPosition().getX()*wsize, (4-p.getPosition().getY())*hsize,wsize,hsize,null);
@@ -87,7 +89,7 @@ public class SubboardDisplay extends JPanel implements MouseListener {
 			.filter(p->p.getX()==gridx)
 			.filter(p->p.getY()==gridy)
 			.findFirst().ifPresent((p)->{
-					piece.moveTo(p);
+					piece.moveTo(p,board.getPieces());
 				});
 			Selection.setSelection(null);
 		} else {
