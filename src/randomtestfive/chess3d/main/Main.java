@@ -4,7 +4,7 @@ import java.util.Set;
 
 import randomtestfive.chess3d.core.Board;
 import randomtestfive.chess3d.core.Player;
-import randomtestfive.chess3d.core.piece.*;
+import randomtestfive.chess3d.core.pieces.*;
 import randomtestfive.chess3d.graphics.MainDisplay;
 
 public class Main {

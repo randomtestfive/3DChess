@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import randomtestfive.chess3d.core.piece.ChessPiece;
+import randomtestfive.chess3d.core.pieces.ChessPiece;
 
 public class Board {
 	private final Set<ChessPiece> pieces;

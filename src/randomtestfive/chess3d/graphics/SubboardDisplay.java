@@ -16,7 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import randomtestfive.chess3d.core.Board;
-import randomtestfive.chess3d.core.piece.ChessPiece;
+import randomtestfive.chess3d.core.pieces.ChessPiece;
 
 public class SubboardDisplay extends JPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;

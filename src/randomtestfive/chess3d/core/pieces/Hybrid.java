@@ -1,4 +1,4 @@
-package randomtestfive.chess3d.core.piece;
+package randomtestfive.chess3d.core.pieces;
 
 import java.util.Arrays;
 import java.util.HashSet;

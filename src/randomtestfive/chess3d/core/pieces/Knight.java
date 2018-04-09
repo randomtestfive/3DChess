@@ -1,4 +1,4 @@
-package randomtestfive.chess3d.core.piece;
+package randomtestfive.chess3d.core.pieces;
 
 import randomtestfive.chess3d.core.Player;
 import randomtestfive.chess3d.core.Position3D;
