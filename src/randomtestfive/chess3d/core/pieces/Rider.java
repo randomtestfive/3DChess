@@ -2,6 +2,7 @@ package randomtestfive.chess3d.core.pieces;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import randomtestfive.chess3d.core.Player;
@@ -60,12 +61,16 @@ public class Rider extends ChessPiece {
 				if(tmp[0].getX() >= 0 && tmp[0].getX() <= 4
 						&& tmp[0].getY() >= 0 && tmp[0].getY() <= 4
 						&& tmp[0].getZ() >= 0 && tmp[0].getZ() <= 4) {
-					if(!pieces.stream()
-							.filter(p->p.getPosition().equals(tmp))
-							.findFirst().isPresent()) {
-						possible.add(tmp[0]);
-					} else {
+					Optional<ChessPiece> occupied = pieces.stream()
+							.filter(p->p.getPosition().equals(tmp[0]))
+							.findFirst();
+					if(occupied.isPresent()) {
+						if(occupied.get().getOwner()!=getOwner()) {
+							possible.add(tmp[0]);
+						}
 						break;
+					} else {
+						possible.add(tmp[0]);
 					}
 				} else {
 					break;

@@ -40,10 +40,16 @@ public class SubboardDisplay extends JPanel implements MouseListener {
 					ImageIO.read(getClass().getResource("pawn-w.png"))});
 			sprites.put("Knight",new BufferedImage[]{ImageIO.read(getClass().getResource("knight-b.png")),
 					ImageIO.read(getClass().getResource("knight-w.png"))});
-			sprites.put("King",new BufferedImage[]{ImageIO.read(getClass().getResource("knight-b.png")),
-					ImageIO.read(getClass().getResource("knight-w.png"))});
-			sprites.put("Rook", new BufferedImage[]{ImageIO.read(getClass().getResource("pawn-b.png")),
-					ImageIO.read(getClass().getResource("pawn-w.png"))});
+			sprites.put("King",new BufferedImage[]{ImageIO.read(getClass().getResource("king-b.png")),
+					ImageIO.read(getClass().getResource("king-w.png"))});
+			sprites.put("Rook", new BufferedImage[]{ImageIO.read(getClass().getResource("rook-b.png")),
+					ImageIO.read(getClass().getResource("rook-w.png"))});
+			sprites.put("Bishop", new BufferedImage[]{ImageIO.read(getClass().getResource("bishop-b.png")),
+					ImageIO.read(getClass().getResource("bishop-w.png"))});
+			sprites.put("Unicorn", new BufferedImage[]{ImageIO.read(getClass().getResource("unicorn-b.png")),
+					ImageIO.read(getClass().getResource("unicorn-w.png"))});
+			sprites.put("Queen", new BufferedImage[]{ImageIO.read(getClass().getResource("queen-b.png")),
+					ImageIO.read(getClass().getResource("queen-w.png"))});
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,7 +73,7 @@ public class SubboardDisplay extends JPanel implements MouseListener {
 			}
 		}
 		g2d.setColor(Color.yellow);
-		Selection.getSelection().ifPresent(s->s.getPossibleMoves(board.getPieces())
+		Globals.getSelection().ifPresent(s->s.getPossibleMoves(board.getPieces())
 			.stream()
 			.filter(p->p.getZ()==layer)
 			.forEach(p->g2d.fillRect(wsize*p.getX(), hsize*(4-p.getY()), wsize, hsize)));
@@ -84,8 +90,8 @@ public class SubboardDisplay extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		final int gridx = e.getX()*5/getWidth();
 		final int gridy = 4-(e.getY()*5/getHeight());
-		if(Selection.getSelection().isPresent()) {
-			final ChessPiece piece = Selection.getSelection().get();
+		if(Globals.getSelection().isPresent()) {
+			final ChessPiece piece = Globals.getSelection().get();
 			piece.getPossibleMoves(board.getPieces()).stream()
 			.filter(p->p.getZ()==layer)
 			.filter(p->p.getX()==gridx)
@@ -93,9 +99,9 @@ public class SubboardDisplay extends JPanel implements MouseListener {
 			.findFirst().ifPresent((p)->{
 					piece.moveTo(p,board.getPieces());
 				});
-			Selection.setSelection(null);
+			Globals.setSelection(null);
 		} else {
-			Selection.setSelection(board.onSubBoard(layer).stream()
+			Globals.setSelection(board.onSubBoard(layer).stream()
 					.filter(p->p.getPosition().getX()==gridx)
 					.filter(p->p.getPosition().getY()==gridy)
 					.findFirst().orElse(null));

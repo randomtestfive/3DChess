@@ -29,8 +29,6 @@ public class Pawn extends ChessPiece {
 		Set<Position3D> piecepos = pieces.stream()
 				.map((p)->p.getPosition())
 				.collect(Collectors.toSet());
-		System.out.println(piecepos);
-		System.out.println(getPosition().getOffset(0, 0, offset));
 		if(getPosition().getY()+offset >= 0 && getPosition().getY()+offset <= 4
 				&& !piecepos.contains(getPosition().getOffset(0, offset, 0))) {
 			possible.add(getPosition().getOffset(0, offset, 0));

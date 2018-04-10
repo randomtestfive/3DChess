@@ -10,7 +10,7 @@ public class MainDisplay {
 	public JFrame frame;
 	
 	public MainDisplay(Board b) {
-		frame = new JFrame("thing");
+		frame = new JFrame("3D Chess");
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS));
 		frame.getContentPane().add(new SubboardDisplay(false, b, 4));
 		frame.getContentPane().add(Box.createHorizontalStrut(10));

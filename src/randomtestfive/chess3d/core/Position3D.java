@@ -1,12 +1,23 @@
 package randomtestfive.chess3d.core;
 
+import java.util.Arrays;
+
 public class Position3D {
 	private final int xpos, ypos, zpos;
+	private final String[] xt = new String[]{"a","b","c","d","e"};
+	private final String[] yt = new String[]{"1","2","3","4","5"};
+	private final String[] zt = new String[]{"A","B","C","D","E"};
 	
 	public Position3D(int x, int y, int z) {
 		xpos = x;
 		ypos = y;
 		zpos = z;
+	}
+	
+	public Position3D(String in) {
+		zpos = Arrays.asList(zt).indexOf(in.substring(0, 1));
+		xpos = Arrays.asList(xt).indexOf(in.substring(1, 2));
+		ypos = Arrays.asList(yt).indexOf(in.substring(2, 3));
 	}
 	
 	public int getX() { return xpos; }
@@ -23,9 +34,9 @@ public class Position3D {
 	
 	@Override
 	public String toString() {
-		String x = (new String[]{"a","b","c","d","e"})[getX()];
-		String y = (new String[]{"1","2","3","4","5"})[getY()];
-		String z = (new String[]{"A","B","C","D","E"})[getZ()];
+		String x = xt[getX()];
+		String y = yt[getY()];
+		String z = zt[getZ()];
 		return z+x+y;
 		//return xpos+" "+ypos+" "+zpos;
 	}
