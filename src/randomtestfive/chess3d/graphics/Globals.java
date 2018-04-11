@@ -4,11 +4,14 @@ import java.util.Optional;
 
 import randomtestfive.chess3d.core.Player;
 import randomtestfive.chess3d.core.pieces.ChessPiece;
+import randomtestfive.chess3d.network.Chess3DClient;
 
 public class Globals {
 	private static Optional<ChessPiece> selection = Optional.empty();
 	private static Player player;
-	private static int turn = 0;
+	private static int turn = 1;
+	private static Chess3DClient client;
+	private static boolean ready = false;
 	
 	public static void setSelection(ChessPiece s) {
 		selection = Optional.ofNullable(s);
@@ -32,5 +35,21 @@ public class Globals {
 	
 	public static int getTurn() {
 		return turn;
+	}
+	
+	public static void setClient(Chess3DClient c) {
+		client = c;
+	}
+	
+	public static Chess3DClient getClient() {
+		return client;
+	}
+	
+	public static void ready() {
+		ready = true;
+	}
+	
+	public static boolean getReady() {
+		return ready;
 	}
 }

@@ -39,11 +39,22 @@ public class Chess3DServer {
 				pw2 = new PrintWriter(ps2.getOutputStream(), true);
 				pi2 = new BufferedReader(new InputStreamReader(ps2.getInputStream()));
 				pw2.println("p0");
-				int turn = 0;
+				pw1.println("ready");
+				pw2.println("ready");
+				int turn = 1;
 				while(true) {
-					if(turn%2==0) {
+					if(turn%2==1) {
 						if(pi1.ready()) {
-							System.out.println("[SERVER]: "+pi1.readLine());
+							String tmp = pi1.readLine();
+							System.out.println("[SERVER]: "+tmp);
+							pw2.println(tmp);
+							turn++;
+						}
+					} else {
+						if(pi2.ready()) {
+							String tmp = pi2.readLine();
+							System.out.println("[SERVER]: "+tmp);
+							pw1.println(tmp);
 							turn++;
 						}
 					}
