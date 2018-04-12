@@ -22,6 +22,27 @@ public class Pawn extends ChessPiece {
 				new Position3D(1,0,offset),
 				new Position3D(0,offset,offset)));
 	}
+	
+	@Override
+	public void moveTo(Position3D pos, Set<ChessPiece> p) {
+		super.moveTo(pos, p);
+		boolean replace = false;
+		switch(getOwner()) {
+		case BLACK:
+			if(getPosition().getY()==0 && getPosition().getZ()==0) {
+				replace = true;
+			}
+			break;
+		case WHITE:
+			if(getPosition().getY()==4 && getPosition().getZ()==4) {
+				replace = true;
+			}
+		}
+		if(replace) {
+			p.remove(this);
+			p.add(new Queen(pos.getX(), pos.getY(), pos.getZ(), getOwner()));
+		}
+	}
 
 	@Override
 	public Set<Position3D> getPossibleMoves(Set<ChessPiece> pieces) {

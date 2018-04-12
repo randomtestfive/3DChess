@@ -11,8 +11,8 @@ public abstract class ChessPiece {
 	private final Player owner;
 	
 	public ChessPiece(int x, int y, int z, Player owner) {
-		moveTo(x, y, z, new HashSet<>());
 		this.owner = owner; 
+		moveTo(x, y, z, new HashSet<>());
 	}
 	
 	public void moveTo(int x, int y, int z, Set<ChessPiece> pieces) {
