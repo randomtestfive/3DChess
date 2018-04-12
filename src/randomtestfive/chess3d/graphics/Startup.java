@@ -13,17 +13,20 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import randomtestfive.chess3d.core.Board;
+import randomtestfive.chess3d.core.Player;
 import randomtestfive.chess3d.core.StartPieces;
 import randomtestfive.chess3d.network.Chess3DClient;
 import randomtestfive.chess3d.network.Chess3DServer;
 
 public class Startup implements ActionListener {
 	private JFrame frame;
-	JButton server;
+	JButton server, local;
 	JTextField text;
 	
 	public Startup() {
 		frame = new JFrame("3D Chess");
+		local = new JButton("Start Local");
+		local.addActionListener(this);
 		server = new JButton("Start Server");
 		server.addActionListener(this);
 		JButton client = new JButton("Start Client");
@@ -35,6 +38,7 @@ public class Startup implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		frame.add(local);
 		frame.add(server);
 		frame.add(client);
 		text = new JTextField(5);
@@ -53,9 +57,15 @@ public class Startup implements ActionListener {
 		}
 		Board b = new Board();
 		b.getPieces().addAll(StartPieces.getStartPieces());
+		MainDisplay md = new MainDisplay(b);
 		
+		if(!arg0.getSource().equals(local)) {
+			new Chess3DClient(text.getText(), b, md.boards::repaint);
+		} else {
+			Globals.setPlayer(Player.WHITE);
+			Globals.ready();
+		}
 		
-		new Chess3DClient(text.getText(), b, new MainDisplay(b).boards::repaint);
 		frame.dispose();
 	}
 }

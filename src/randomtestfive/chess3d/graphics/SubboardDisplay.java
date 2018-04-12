@@ -104,7 +104,7 @@ public class SubboardDisplay extends JPanel implements MouseListener, MouseMotio
 			.filter(p->p.getX()==gridx)
 			.filter(p->p.getY()==gridy)
 			.findFirst().ifPresent((p)->{
-					Globals.getClient().commitMove(piece.getPosition(), p);
+					Globals.commitMove(piece.getPosition(), p);
 					Globals.nextTurn();
 					piece.moveTo(p,board.getPieces());
 				});

@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.function.Consumer;
 
 import randomtestfive.chess3d.core.Board;
 import randomtestfive.chess3d.core.Player;
@@ -25,7 +24,7 @@ public class Chess3DClient {
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			Globals.setPlayer(Player.values()[Integer.parseInt(in.readLine().substring(1))]);
 			Globals.setClient(this);
-			new Thread(new ClientThread(out, in, b, c)).start();
+			new Thread(new ClientThread(in, b, c)).start();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -33,13 +32,11 @@ public class Chess3DClient {
 	}
 	
 	private static class ClientThread implements Runnable {
-		private PrintWriter out;
 		private BufferedReader in;
 		private Board board;
 		private Runnable callback;
 
-		public ClientThread(PrintWriter o, BufferedReader i, Board b, Runnable c) {
-			out = o;
+		public ClientThread(BufferedReader i, Board b, Runnable c) {
 			in = i;
 			board = b;
 			callback = c;

@@ -3,6 +3,7 @@ package randomtestfive.chess3d.graphics;
 import java.util.Optional;
 
 import randomtestfive.chess3d.core.Player;
+import randomtestfive.chess3d.core.Position3D;
 import randomtestfive.chess3d.core.pieces.ChessPiece;
 import randomtestfive.chess3d.network.Chess3DClient;
 
@@ -55,5 +56,13 @@ public class Globals {
 	
 	public static boolean getReady() {
 		return ready;
+	}
+	
+	public static void commitMove(Position3D s, Position3D e) {
+		if(client!=null) {
+			client.commitMove(s, e);
+		} else {
+			player=Player.values()[(player.ordinal()+1)%2];
+		}
 	}
 }
