@@ -49,6 +49,10 @@ public class Globals {
 		ready = true;
 	}
 	
+	public static void done() {
+		ready = false;
+	}
+	
 	public static boolean getReady() {
 		return ready;
 	}

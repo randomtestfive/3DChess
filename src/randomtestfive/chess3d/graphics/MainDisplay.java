@@ -1,14 +1,20 @@
 package randomtestfive.chess3d.graphics;
 
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import randomtestfive.chess3d.core.Board;
 import randomtestfive.chess3d.core.Player;
+import randomtestfive.chess3d.core.pieces.ChessPiece;
+import randomtestfive.chess3d.core.pieces.King;
 
 public class MainDisplay {
 	public JFrame frame;
@@ -44,6 +50,14 @@ public class MainDisplay {
 			frame.setTitle("3D Chess - "+Globals.getPlayer());
 			while(true) {
 				turn.setText("Turn: "+Globals.getTurn()+" - "+Player.values()[Globals.getTurn()%2]);
+				Set<ChessPiece> kings = b.getPieces().stream()
+						.filter(p->p instanceof King)
+						.collect(Collectors.toSet());
+				if(kings.size()<2) {
+					Globals.done();
+					JOptionPane.showMessageDialog(frame, kings.stream().findFirst().get().getOwner()+" WINS");
+					System.exit(0);
+				}
 				Thread.yield();
 			}
 		}).start();

@@ -2,10 +2,14 @@ package randomtestfive.chess3d.graphics;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import randomtestfive.chess3d.core.Board;
@@ -25,6 +29,12 @@ public class Startup implements ActionListener {
 		JButton client = new JButton("Start Client");
 		client.addActionListener(this);
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		try {
+			frame.add(new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("title.png")))));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		frame.add(server);
 		frame.add(client);
 		text = new JTextField(5);
