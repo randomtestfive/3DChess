@@ -57,10 +57,11 @@ public class Startup implements ActionListener {
 		}
 		Board b = new Board();
 		b.getPieces().addAll(StartPieces.getStartPieces());
+		
 		MainDisplay md = new MainDisplay(b);
 		
 		if(!arg0.getSource().equals(local)) {
-			new Chess3DClient(text.getText(), b, md.boards::repaint);
+			new Chess3DClient(text.getText(), b, md::repaint);
 		} else {
 			Globals.setPlayer(Player.WHITE);
 			Globals.ready();

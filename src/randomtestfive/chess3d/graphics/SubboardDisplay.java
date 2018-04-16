@@ -29,8 +29,9 @@ public class SubboardDisplay extends JPanel implements MouseListener, MouseMotio
 	private Board board;
 	private int layer;
 	private static Map<String, BufferedImage[]> sprites;
+	private final Runnable callback;
 	
-	public SubboardDisplay(boolean invert, Board b, int layer) {
+	public SubboardDisplay(boolean invert, Board b, int layer, Runnable c) {
 		super();
 		//setSize(100, 100);
 		this.invert = invert;
@@ -60,6 +61,8 @@ public class SubboardDisplay extends JPanel implements MouseListener, MouseMotio
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		setPreferredSize(new Dimension(320, 320));
+		
+		callback = c;
 	}
 
 	@Override
@@ -107,6 +110,7 @@ public class SubboardDisplay extends JPanel implements MouseListener, MouseMotio
 					Globals.commitMove(piece.getPosition(), p);
 					Globals.nextTurn();
 					piece.moveTo(p,board.getPieces());
+					callback.run();
 				});
 			Globals.setSelection(null);
 		} else {
